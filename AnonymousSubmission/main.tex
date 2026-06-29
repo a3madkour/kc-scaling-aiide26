@@ -1,0 +1,734 @@
+%File: anonymous-submission-latex-2024.tex
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai24}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+%
+% These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%
+% These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
+\lstset{%
+	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+% TODO REMOVE BEFORE SUBMISSION
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+%
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2024.1)
+}
+% DISALLOWED PACKAGES
+% \usepackage{authblk} -- This package is specifically forbidden
+% \usepackage{balance} -- This package is specifically forbidden
+% \usepackage{color (if used in text)
+% \usepackage{CJK} -- This package is specifically forbidden
+% \usepackage{float} -- This package is specifically forbidden
+% \usepackage{flushend} -- This package is specifically forbidden
+% \usepackage{fontenc} -- This package is specifically forbidden
+% \usepackage{fullpage} -- This package is specifically forbidden
+% \usepackage{geometry} -- This package is specifically forbidden
+% \usepackage{grffile} -- This package is specifically forbidden
+% \usepackage{hyperref} -- This package is specifically forbidden
+% \usepackage{navigator} -- This package is specifically forbidden
+% (or any other package that embeds links such as navigator or hyperref)
+% \indentfirst} -- This package is specifically forbidden
+% \layout} -- This package is specifically forbidden
+% \multicol} -- This package is specifically forbidden
+% \nameref} -- This package is specifically forbidden
+% \usepackage{savetrees} -- This package is specifically forbidden
+% \usepackage{setspace} -- This package is specifically forbidden
+% \usepackage{stfloats} -- This package is specifically forbidden
+% \usepackage{tabu} -- This package is specifically forbidden
+% \usepackage{titlesec} -- This package is specifically forbidden
+% \usepackage{tocbibind} -- This package is specifically forbidden
+% \usepackage{ulem} -- This package is specifically forbidden
+% \usepackage{wrapfig} -- This package is specifically forbidden
+% DISALLOWED COMMANDS
+% \nocopyright -- Your paper will not be published if you use this command
+% \addtolength -- This command may not be used
+% \balance -- This command may not be used
+% \baselinestretch -- Your paper will not be published if you use this command
+% \clearpage -- No page breaks of any kind may be used for the final version of your paper
+% \columnsep -- This command may not be used
+% \newpage -- No page breaks of any kind may be used for the final version of your paper
+% \pagebreak -- No page breaks of any kind may be used for the final version of your paperr
+% \pagestyle -- This command may not be used
+% \tiny -- This is not an acceptable font size.
+% \vspace{- -- No negative value may be used in proximity of a caption, figure, table, section, subsection, subsubsection, or reference
+% \vskip{- -- No negative value may be used to alter spacing above or below a caption, figure, table, section, subsection, subsubsection, or reference
+
+\setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
+
+% The file aaai24.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+
+% Title
+
+% Your title must be in mixed case, not sentence case.
+% That means all verbs (including short verbs like be, is, using,and go),
+% nouns, adverbs, adjectives should be capitalized, including both words in hyphenated terms, while
+% articles, conjunctions, and prepositions are lower case unless they
+% directly follow a colon or long dash
+\title{Scaling Knowledge Compilation for Procedural Content Generation}
+\author{
+    %Authors
+    % All authors must be in the same font size and format.
+    Written by AAAI Press Staff\textsuperscript{\rm 1}\thanks{With help from the AAAI Publications Committee.}\\
+    AAAI Style Contributions by Pater Patel Schneider,
+    Sunil Issar,\\
+    J. Scott Penberthy,
+    George Ferguson,
+    Hans Guesgen,
+    Francisco Cruz\equalcontrib,
+    Marc Pujol-Gonzalez\equalcontrib
+}
+\affiliations{
+    %Afiliations
+    \textsuperscript{\rm 1}Association for the Advancement of Artificial Intelligence\\
+    % If you have multiple authors and multiple affiliations
+    % use superscripts in text and roman font to identify them.
+    % For example,
+
+    % Sunil Issar\textsuperscript{\rm 2},
+    % J. Scott Penberthy\textsuperscript{\rm 3},
+    % George Ferguson\textsuperscript{\rm 4},
+    % Hans Guesgen\textsuperscript{\rm 5}
+    % Note that the comma should be placed after the superscript
+
+    1900 Embarcadero Road, Suite 101\\
+    Palo Alto, California 94303-3310 USA\\
+    % email address must be in roman text type, not monospace or sans serif
+    proceedings-questions@aaai.org
+%
+% See more examples next
+}
+
+%Example, Single Author, ->> remove \iffalse,\fi and place them surrounding AAAI title to use it
+\iffalse
+\title{Scaling Knowledge Compilation for Procedural Content Generation}
+\author {
+    Author Name
+}
+\affiliations{
+    Affiliation\\
+    Affiliation Line 2\\
+    name@example.com
+}
+\fi
+
+\iffalse
+%Example, Multiple Authors, ->> remove \iffalse,\fi and place them surrounding AAAI title to use it
+\title{My Publication Title --- Multiple Authors}
+\author {
+    % Authors
+    First Author Name\textsuperscript{\rm 1},
+    Second Author Name\textsuperscript{\rm 2},
+    Third Author Name\textsuperscript{\rm 1}
+}
+\affiliations {
+    % Affiliations
+    \textsuperscript{\rm 1}Affiliation 1\\
+    \textsuperscript{\rm 2}Affiliation 2\\
+    firstAuthor@affiliation1.com, secondAuthor@affilation2.com, thirdAuthor@affiliation1.com
+}
+\fi
+
+
+% REMOVE THIS: bibentry
+% This is only needed to show inline citations in the guidelines document. You should not need it and can safely delete it.
+\usepackage{bibentry}
+% END REMOVE bibentry
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Knowledge compilation has massive potential for procedural content generation (PCG). By compiling a design space into a circuit, we encode a generator's hard validity constraints into a representation that produces artifacts that are valid by construction. Generation is then fast and search-free and circuits permit on-the-fly conditioning, which is useful for tasks such as interactive inpainting. Circuits also carry a distribution and thus we can sample uniformly across the valid space and/or according to weights learned from a corpus. However, circuits struggle to scale to game development needs. The cost of compiling a design space is governed by its treewidth, or how tangled its constraints are, and how many choices stay mutually entangled across any cut through the structure. This paper explores that cost in the context of PCG and tests it on the theoretical worst case; wave-function-collapse tile-grid generation. We propose strategies to scale past the wall naive compilation poses; decomposition to small circuits conditioned on shared boundries and a Markov-Chain Monte Carlo (MCMC) toolkit for sampling. Circuit structural properties allow the pieces to recompose into exact, uniform sampling over grids larger than a single monolithic compile can reach and global constraints that have no small boundary to cut along are addressable through MCMC sampling.
+\end{abstract}
+
+\section{Introduction}
+
+\todo{redo the entire intro}
+
+A procedural content generator that ships in a game must usually satisfy two requirements at once.
+First, **hard feasibility**: the output must obey constraints that admit no slack — a WFC tileset's
+local adjacency rules, a platformer level's reachability from spawn to goal, a card deck's mana-cost
+budget. A single violated constraint is often a shipped bug. Second, **distributional fidelity**:
+the output should *look like* the corpus a designer curated — the right tile frequencies, the right
+local 2×2 patterns, the right "feel." These two requirements pull against each other in the standard
+toolbox. Constraint solvers (SAT/CDCL, answer-set, classic WFC propagation) nail feasibility but
+sample from a distribution that is an artifact of the solver's search order, not the designer's
+intent. Statistical style-matchers — the multidimensional Markov chains and Markov random fields of
+Snodgrass and Ontañón [2017], of which WFC is formally a special case [Karth & Smith 2017] — match
+the corpus distribution but only softly respect hard structure, drifting into infeasible content.
+
+**Compiling the design space to a circuit dissolves the tension.** We compile a PCG design space
+once to a probabilistic sentential decision diagram (PSDD) or a d-DNNF, and then *sample from the
+circuit*. Because the circuit represents the feasible set exactly, every draw is feasible by
+construction — feasibility is baked into the support, not enforced at sample time. Because the
+circuit is smooth, deterministic, and decomposable, we can attach per-literal weights and descend it
+to draw exactly i.i.d. from any target the weights encode, and we can condition on arbitrary
+literal-conjunction evidence for free (a single conjoin pass, zero recompile). Paper 1 takes this
+compiled circuit as a substrate for *analysis* — exact counts, marginals, entropy, expressive-range
+reads — and shows the whole query family is answered exactly with free conditioning. The present
+paper takes the same circuit as a substrate for *generation*. The intellectual position is that
+compilation **unifies data-driven and logical specification of a PCG design space**: the hard
+constraints are the logical half (the circuit's support), and the per-literal weights learned from a
+corpus are the data-driven half (the distribution over that support), reconciled in one object.
+
+> **TODO (P2-T2, carried from the source draft, author-owned):** the monolithic-compile motivation
+> is not self-evidently relevant to a reader not already sold on circuits. Tie this framing to the
+> prior work *"Ahead-of-time compilation of diverse samplers of structured design spaces"* [CITE] and
+> to the thesis chapter where parameters were learned from data, to make the data-driven + logical
+> unification the paper's core intellectual position rather than an aside. Add the citation.
+
+The single price is the compile cost, and it is paid up front and is **brutally non-linear**: a WFC
+grid that compiles in 0.5 s at one width can exhaust 30 GB of memory two width-steps later. A
+practitioner needs to predict feasibility before paying that cost, and — where the cost is too high
+— to route around it. This paper is organized as the two halves of that problem.
+
+
+**Act I — the envelope.** When does a PCG design space compile at all? We show compile feasibility is
+governed by the treewidth of the encoded constraint system: a *proven* upper bound (bounded
+treewidth ⟹ linear-size SDD) whose practical consequence is an *empirical* cliff at a
+domain-specific width. We measure the treewidth→size law across 25 instances and 5 domains, replicate
+the cliff in a second domain independent of the known Lode Runner wall, and catalog the proven and
+empirical walls that bound what compilation can ever do.
+
+**Act II — the escape.** Given the cliff, how do we still generate hard-constrained,
+distribution-matched content past it? The answer is a single lever — **decomposition** — and the
+paper's central finding is that *the same lever moves the envelope on both the compile side and the
+generation side*. A controlled ablation isolates decomposition as the one compile-side lever that
+works; local-block conditioning is that same mechanism applied to sampling, scaling exact draws far
+past the monolithic cliff; an MCMC toolkit over circuit blocks handles constraints (connectivity)
+that never compile small; and a head-to-head against the standard MRF style-matcher shows the escape
+preserves distributional fidelity.
+
+**Contributions.**
+
+1. **A characterization of the compile envelope for PCG** (§3–§4): the treewidth→SDD-size *size law*
+   across 25 instances / 5 domains; the width-governed cliff replicated in a second domain
+   (`mxgmn_knot` W=10→wall W=11, independent of the W≈14 Lode Runner cliff); and a tagged catalog of
+   the **walls** — proven lower bounds (treewidth, DPP, MAP, sum-out), reasoned scope boundaries
+   (the Turing/Machinations boundary), and empirical cliffs — each labeled proven, empirical, or
+   reasoned.
+
+2. **Decomposition is the single lever that moves the envelope — on both sides** (§5). Compile side
+   (controlled C3 ablation on the hard knot tileset): decomposition holds flat at **887 SDD nodes
+   through W=14** where the baseline walls at W=12, while a frontier-aligned vtree gives *identical*
+   size and D4 walls at W=4. Generation side (the *same* mechanism): local-block conditioning scales
+   exact constrained sampling to **32×32** on compile-easy `toy_roads` and **W=16** on compile-hard
+   `knot`, at **>160× less RAM** than the monolith, per-block compile flat at ~60 MB.
+
+3. **A circuit-based MCMC toolkit for grids too large to compile monolithically** (§6): block-Gibbs
+   + parallel tempering (exact-conditional always-accept lifts coarse-block ESS **3.1–4.4×**; a soft
+   β knob dials connected-fraction 0.097→1.0), constraint-conditioned SIR/SNIS that ports
+   cross-domain to the quest prereq DAG (TV < 0.05), and SAT-Metropolis (a soft tile-frequency
+   feature contracted **39%** at β=10).
+
+4. **The escape preserves distributional fidelity past the wall** (§7): circuit row-chain sampling
+   beats a Snodgrass-style MRF style-matcher on symmetric 2×2-pattern KL at **every** tested width
+   and **every** of 3 seeds (9/9 arms; mean margin **0.68/0.94/0.99 nats** at W=8/12/14), framed
+   honestly as accuracy-vs-wall (the W=14 circuit arm runs ~10.8 h vs the MRF's ~90 s).
+
+We keep our negatives (§8): a hierarchical-fill uniformity corrector is refuted, statistical
+diversity is ~99.6% designer-invisible, there is no set-level diversity, the frontier-aligned vtree
+gives no envelope gain, and D4 is instance-dependent.
+
+---
+
+## 9. Contributions (restated, concrete)
+
+1. **A characterization of the compile envelope for PCG.** Treewidth→SDD-size is monotone across 25
+   instances / 5 domains (C2: primal_tw 0–6 → ≤265 nodes; knot tw 33–90 → ~45.5k nodes, size to
+   493,727 at 6×6). The width-governed cliff replicates in a second domain (C7: `mxgmn_knot` W=10 →
+   wall W=11+, vtree width 26→650 super-linear) independent of the W≈14 Lode Runner cliff. A tagged
+   wall catalog separates proven lower bounds from empirical cliffs and reasoned scope boundaries.
+   [C2, C7, the WALL-* family]
+
+   \todo{can we provably say anything about decomposition here}
+2. **Decomposition as the  lever that moves the envelope — on both sides.** Compile side (C3
+   controlled ablation, replicated on two hard tilesets): **flat 887 nodes through W=14** where the
+   baseline walls at W=12, against non-movers (frontier-vtree identical, D4 instance-dependent,
+   sharing refuted). Generation side (the same mechanism): local-block conditioning reaches **32×32**
+   (toy_roads) / **W=16** (knot) at **>160× less RAM** than the monolith, per-block compile flat
+   ~60 MB. [EXP-C3-LEVER-ABLATION, EXP-REDUN2-*, EXP-B1T-TOYROADS-32, EXP-B1-KNOT-LARGEW, HYP-REDUN-2]
+
+3. **A circuit-based MCMC toolkit for grids too large to compile monolithically.** Block-Gibbs
+   exact-conditional always-accept lifts coarse-block ESS **3.1–4.4×**; parallel tempering adds a β
+   knob dialing connected-fraction **0.097→1.0**; constraint-conditioned SIR/SNIS ports cross-domain
+   (WFC + quest, TV < 0.05); SAT-Metropolis contracts a soft tile-frequency feature by **39%** at
+   β=10. [HYP-D4-1/2/3, HYP-D5-4, CAP-D4-5]
+
+4. **The escape preserves distributional fidelity past the wall.** Circuit row-chain beats the MRF
+   style-matcher on 2×2-pattern KL at **every width and every seed** (9/9; mean margin
+   **0.68/0.94/0.99 nats** at W=8/12/14, ≥12× tolerance; per-tile 16–19× lower), framed as
+   accuracy-vs-wall (W=14 circuit ~10.8 h vs MRF ~90 s). [HYP-D5-11, the capstone]
+
+
+
+
+
+\section{Background}
+\subsection{Constrant based PCG}
+\subsection{Data-driven PCG}
+\todo{Need to list out all the MCMC samplers in PCG (emphasize on Sam's work) }
+\subsection{Knowledge Compilation}
+\subsection{Circuits for PCG}
+
+\section{Definitions}
+\todo{rename this}
+\todo{justify why SDDs here}
+\todo{effect of v-trees and variable order on circuit size}
+\todo{define the kind of constraints under consideration; global vs local}
+**SDDs and PSDDs.** A *Sentential Decision Diagram* (SDD) is a canonical, polynomial-time-queryable
+representation of a Boolean function, built bottom-up by *compilation* — conjoining the CNF clauses
+one at a time under a fixed *vtree*. A *PSDD* parameterizes an SDD with a distribution, adding exact
+weighted model counting (WMC), marginals, and exact i.i.d. sampling. For PCG we encode a design space
+as a CNF over Boolean choice variables (one variable per (cell, tile) in WFC, per (node, taken) in a
+skill tree, per (card, in-deck) in a deck) whose satisfying assignments are exactly the feasible
+artifacts, compile to an SDD, and read counting/sampling/analysis off the compiled circuit.
+
+**Sampling is a single top-down pass.** On a deterministic (mutually-exclusive OR-children),
+decomposable (variable-disjoint AND-children) circuit, the WMC is a single bottom-up arithmetic pass
+and *sampling is a single top-down pass*. A descent that, at each decision node, chooses a child with
+probability proportional to its subtree's WMC, and at each AND node recurses into both children,
+draws a model exactly from the WMC-induced distribution in O(|circuit|) per draw (the WAPS/KUS
+recurrence). With all literal weights at 0.5 this is uniform over the feasible set; with per-literal
+Bernoulli weights it is the product distribution those weights define, *restricted to the feasible
+set*. The constant 2^|free-vars| factor cancels in the descent, so the walk is numerically safe on
+200+-variable instances (we hit and fixed a real uint64 overflow in PySDD's `global_model_count` at
+≥64 variables; §6). **Conditioning is structurally free:** to condition on literal-conjunction
+evidence (a fixed cell, a fixed row), we conjoin the evidence cube into the root and re-annotate
+weights — no recompilation — then run the same descent. Conditioning is the workhorse primitive
+behind both the row-chain sampler (§7) and every block sampler (§5–§6).
+
+**Vtrees.** A *vtree* is a full binary tree over the variables that dictates how the SDD recursively
+decomposes the function. It is the single most important structural knob: the same function compiled
+under different vtrees can differ in size by orders of magnitude, and the minimum-width vtree is hard
+to find. We use a family of vtree strategies (`V0` right-linear, `V1` balanced, `V5` a
+MINCE/frontier-oriented order, `V6` a quad-tree cell-contiguous order) and build strategies (`B0`–`B5`).
+
+**Treewidth, pathwidth, and the width parameters.** The compilability of a CNF is governed by the
+*treewidth* of its associated graph. We measure three: *primal treewidth* (variables adjacent iff
+they co-occur in a clause), *incidence treewidth* (the bipartite variable–clause graph), and
+*pathwidth*. For a W×H tiling grid, pathwidth = min(W,H), the formal root of the
+width-in-the-shorter-dimension cliff (THM-pathwidth-obdd, Amarilli–Bourhis 2018). The governing upper
+bound is **bounded treewidth ⟹ linear-size SDD** (THM-treewidth-sdd, Bova–Szeider PODS 2017): a
+function of circuit treewidth *k* has SDD size O(f(k)·n) with *f* triple-exponential in *k*, and the
+equivalence (bounded SDD width ⟺ bounded circuit treewidth) is tight, *provided* a
+tree-decomposition-derived vtree is given. A tighter companion is CV-width (Oztok–Darwiche 2014):
+structured-DNNF/SDD size is O(n·3^w), with CV-width ≤ incidence-treewidth always. The practical
+reading: **measure incidence-treewidth on the candidate CNF and you predict the compiled size before
+paying compile cost** — exactly what §3.1 operationalizes.
+
+**The d-DNNF/D4 backend.** An alternative compilation target is *deterministic decomposable negation
+normal form* (d-DNNF), produced by the D4 compiler (Lagniez–Marquis 2017): CDCL search with
+component caching that chooses decomposition dynamically rather than committing to a vtree up front,
+so it can win on instances where no good static vtree exists (wide skill-tree DAG frontiers; §5.3).
+The trade-off: the in-repo D4 build is count-only — it gives weighted model counts, but the PSDD
+sampling/conditioning machinery runs on the SDD, so D4 is a counting/feasibility oracle, not a
+drop-in sampler.
+
+---
+
+
+\section{Compilation Walls}
+\todo{Enumeration is #P-complete}
+\todo{Circuits get around this by exploiting structure}
+\todo{treewidth is a known limiting factor that characterizes how large circuits can get}
+\todo{Change the title here}
+
+
+\subsection{Theory}
+The load-bearing ones: **THM-treewidth-sdd / THM-pathwidth-obdd** are the formal floor under the
+entire cliff — high-treewidth functions provably cannot have a small SDD, so the SC2 cliff is a
+theorem, not a heuristic. **WALL-D4-1** (DPP) is why §8 reports no set-level diversity: i.i.d. draws
+are independent by construction. **WALL-cross-5** is the satisfiable-but-PSDD-walled band a sequential
+moving-window sampler dead-ends in; the Sturgeon SAT-baseline overlay (EXP-CWALL-M4-locator,
+VALIDATED) confirms it — PSDD's exact compile walls between 5×5 and 11×11 while Sturgeon's SAT solver
+sails past 31×31 in under 5 s, but where PSDD *does* compile it returns exact counts the SAT solver
+cannot. The two tools are complementary, not ranked. **WALL-POE-1** is the totalizer↔order-ideal
+coupling (every var-subset and windowed-decomposition budget DNFs, even a 64-of-3,136-var totalizer —
+so the wall is the coupling, not the size). **WALL-MACH-1** is explicitly a *fairness* wall: no tool
+wins on the full (undecidable) language, so restricting to the bounded-pool/finite-horizon fragment
+is the shared playing field. The full tagged catalog (including the proven-conditional
+THM-posetwidth-ideal and the conjectured THM-cdcl-subset-deadends) is in the Appendix.
+
+
+\subsubsection{Treewidth}
+\todo{Formal proof of treewidth being the factor for most PCG and why grids are the worst; should be just a plop in from previous proofs}
+\todo{use different domains from the analysis paper; need to nail that down fast}
+\todo{low treewidth domain: pick one simple quest graph or something; show how large of a circuit you can compile}
+\todo{high treewidth domain: WFC.}
+
+\subsubsection{Insert name here for complex unrepresentable by CNF easily type problems/queris}
+\todo{yeah, obvious, change the name and the entire ``table'' here}
+DPP-style set-level diversity unrepresentable in a single i.i.d. PC | **proven** | Zhang–Holtzen–VdB 2020 |
+| WALL-D2-2 | Exact MAP without determinism intractable on smooth+decomposable PCs | **proven** | Vergari et al. 2021 |
+| WALL-D2-3 | PSDD summing-out a variable not polytime in general | **proven** | Shen–Choi–Darwiche 2016 |
+| WALL-D5-2 | Symmetry-orbit quotient reduces WFC redundancy by at most \|G\| ≤ 8 | **proven** (capped) | orbit-counting identity; C_eff 2.39/2.71/2.44 at W=2/3/4 |
+| WALL-D5-1 | Code-/parity-structured supports need 2^Ω(n) d-DNNF even for strong-ε approx | **proven-by-citation, NO spot-check** | de Colnet–Mengel 2020; FP-WALL1 |
+| WALL-cross-5 | Decimation sampler dead-ends at α_d < α_s (satisfiable-but-walled band) | **empirical** (finite W; basis reasoned) | EXP-CWALL-E3 restart peak 0.689 at ρ=0.4–0.5, easy-hard-easy |
+| WALL-HIER-1 | Unbounded-width layer ⟹ hierarchy moves the blowup, doesn't remove it | **empirical** | EXP-HIER-ENVELOPE 10×10 ~8 GB cliff; totalizer ENLARGES |
+| WALL-POE-1 | ≈3,136-node totalizer-augmented poe_passive compile intractable; wall is the full-span totalizer | **empirical** (real instance) | EXP-POE1-D4-SCALE: augmented 9.9M-clause CNF DNFs at 300 s; coupling not size |
+| WALL-MACH-1 | Full Machinations Turing-complete ⟹ exact analysis undecidable for ALL methods; KC restricts to bounded fragment | **reasoned** | Minsky-machine reduction; fairness wall, not a strawman |
+
+
+\subsection{Empirical Case Studies}
+\subsubsection{Case Study 1}
+\todo{the two domains in question with the experimental setup and how they fair}
+**EXP-C2-TREEWIDTH-SCATTER** (`benchmarks/runs/c2_treewidth/scatter.jsonl`) compiles 25 instances
+spanning WFC, skill-tree, quest, deck, and encounter under the balanced vtree and records primal /
+incidence / pathwidth (all min-fill-in) against the compiled SDD node count and size. All 25 compiled
+— they are deliberately small enough to isolate *size* (§3.2 supplies the *wall*). The relationship
+is monotone across domains:
+
+| Domain / instance | n_vars | primal_tw | SDD nodes | SDD size |
+|---|---|---|---|---|
+| skill_tree `kisa_4course` | 4 | 2 | 4 | 9 |
+| quest `aladdin` | 8 | 2 | 11 | 25 |
+| skill_tree `fantasy_class_tree` | 20 | 2 | 265 | 694 |
+| quest `quest_chain` | 30 | 6 | 239 | 618 |
+| WFC `mxgmn_knot@4x4` | 208 | 64 | 2,710 | 6,979 |
+| WFC `mxgmn_knot@5x5` | 325 | 77 | 41,403 | 204,030 |
+| WFC `mxgmn_knot@6x6` | 468 | 90 | 45,529 | 493,727 |
+
+The low-treewidth side (skill-tree / quest / deck, primal_tw 0–6) compiles to ≤265 SDD nodes; the
+high-treewidth side (`mxgmn_knot`, primal_tw 33–90) climbs to ~45k nodes, with the SDD *size* (edge
+count) exploding faster still (204k at 5×5, 494k at 6×6). This monotone treewidth→size band is the
+headline size law — the cross-domain generalization of an earlier within-domain finding.
+
+**Honest framing — size law vs the partial within-domain correlation.** The within-domain
+subterm-width study (EXP-FP-ENC3, HYP-D5-12) measured 245 cells across 17 domains: raw Spearman
+ρ(subterm-width, size) = 0.91, *but* ρ(n_vars, size) = 0.96, so the size-controlled partial
+correlation collapses to ρ(stw, size | n_vars) = **0.33** (n=177). The robust finding there is *wall
+prediction* (high incidence-treewidth ⟹ won't compile: TIMEOUT instances have significantly higher
+incidence-treewidth than OK ones, MWU p<0.05), **not** a size regression. C2 supplies the size law as
+a cross-domain monotone *band* trend, a weaker but honest claim than a within-instance formula. We do
+**not** claim "subterm-width predicts SDD size."
+
+\subsubsection{Case Study 2}
+
+The size law says *bigger treewidth, bigger circuit*; the cliff says *past a domain-specific width,
+the circuit stops compiling at all*. The known cliff was W≈14 on VGLC Lode Runner; an envelope
+characterization needs a *second, independent* domain to show the cliff is a property of the
+width-governed compile process, not a Lode Runner artifact.
+
+**EXP-C7-SECOND-DOMAIN-CLIFF** (`benchmarks/runs/c7_second_domain_cliff/c7_cliff.jsonl`) compiles the
+`mxgmn_knot` tileset (T=13) under V5/B3 across square widths W=2..14 (600 s wall, 11 GB RSS budget):
+
+| W | status | compile (s) | SDD nodes | vtree width | peak RSS (MB) |
+|---|---|---|---|---|---|
+| 8 | ok | 1.24 | 212,742 | 416 | 405 |
+| 9 | ok | 173.96 | 4,701,815 | 526 | 5,537 |
+| 10 | ok | **27.26** | **2,846,860** | **650** | 5,934 |
+| 11 | **timeout** | 601.85 | — | — | 5,516 |
+| 12–14 | timeout | ~600 | — | — | — |
+
+The knot **compiles to W=10** (2.85M nodes, 27 s) and **walls at W=11+**. The vtree width climbs
+super-linearly (26 → 650 across W=2..10) — exactly the pathwidth=min(W,H) growth THM-pathwidth-obdd
+makes provable. This is a second domain, structurally independent of Lode Runner (different tileset,
+different adjacency density), exhibiting the same width-governed cliff: the cliff *generalizes*. (W=9
+took longer than W=10 in wall-clock — elimination-order luck on non-power-of-two squares, the same
+non-monotone dip seen in the 165-cell pass1 sweep; it does not move the node-count growth or the wall.)
+
+The original empirical cliff is **VGLC Lode Runner** (EXP-VGLC-LODE-RUNNER-EXTRACTOR; 150 levels,
+22×32, T=8). Its adjacency is *near-saturated* (97% right pairs, 92% below pairs), which makes the
+row-pair SDD grow exponentially in W: W=12 1.22 s / 1.0×10⁶; **W=14 12.6 s / 7.5×10⁶** (the realistic
+Snodgrass-scale ceiling); **W=16 out of reach** (exceeded a 7-min wall and 30 GB VSZ before being
+killed). C7's knot W=11 cliff is the independent replication of this W≈14 cliff.
+
+\subsubsection{Case Study 3: augmenting a circuit with more complex information}
+\todo{figure out what this PoE thing means}
+### 3.3 The expressive-range and PoE ceilings
+
+Two further faces of the same cliff appear when we *augment* the base circuit. Augmenting toy_roads
+(T=4) with a totalizer to read expressive-range (density/difficulty) features exactly has a **~5×5
+ceiling** (a bare 6×6 augmented compile takes 44.6 s; past it the circuit doesn't compile); on the
+near-saturated Lode Runner tileset the same augmented ceiling is even tighter — **4×4** (the
+totalizer's added width is the same width-governed cliff seen again). At the extreme end of the size
+law sits the skill-tree frontier: the base `poe_passive` order-ideal (3,136 vars / 3,115 clauses) is
+where PSDD times out at 600 s while D4 finishes WMC in 0.295 s (the hero case for D4, §5.3), but the
+*full-span budget-augmented* PoE compile is intractable for *both* backends — base-alone D4 is
+trivial (0.317 s, a 472-digit count) but conjoining a unit totalizer over all allocation vars yields
+a **39,808-var / 9,907,819-clause** CNF that D4 DNFs at the 300 s bound (EXP-POE1-D4-SCALE, real
+instance; WALL-POE-1, §4). *(The escape — compile the base once and answer the budget as a
+cardinality-DP query rather than conjoining a totalizer — is exact and full-scale, but it is an
+analysis/query result and is reported in Paper 1.)*
+
+**Empirical vs proven, stated plainly.** The cliffs in §3.2–§3.3 (knot W=11, LR W≈14, ~5×5/4×4 ER
+ceiling, PoE full-span) are all **empirical** — measured on a specific toolchain under a specific
+wall/RSS budget. The *upper bound* governing them (bounded treewidth ⟹ linear-size SDD;
+pathwidth=min(W,H) ⟹ SDD cost ~2^O(min(W,H))·WH) is **proven**. The cliff is where the proven
+exponential meets a finite compute budget.
+
+ 
+The load-bearing ones: **THM-treewidth-sdd / THM-pathwidth-obdd** are the formal floor under the
+entire cliff — high-treewidth functions provably cannot have a small SDD, so the SC2 cliff is a
+theorem, not a heuristic. **WALL-D4-1** (DPP) is why §8 reports no set-level diversity: i.i.d. draws
+are independent by construction. **WALL-cross-5** is the satisfiable-but-PSDD-walled band a sequential
+moving-window sampler dead-ends in; the Sturgeon SAT-baseline overlay (EXP-CWALL-M4-locator,
+VALIDATED) confirms it — PSDD's exact compile walls between 5×5 and 11×11 while Sturgeon's SAT solver
+sails past 31×31 in under 5 s, but where PSDD *does* compile it returns exact counts the SAT solver
+cannot. The two tools are complementary, not ranked. **WALL-POE-1** is the totalizer↔order-ideal
+coupling (every var-subset and windowed-decomposition budget DNFs, even a 64-of-3,136-var totalizer —
+so the wall is the coupling, not the size). **WALL-MACH-1** is explicitly a *fairness* wall: no tool
+wins on the full (undecidable) language, so restricting to the bounded-pool/finite-horizon fragment
+is the shared playing field. The full tagged catalog (including the proven-conditional
+THM-posetwidth-ideal and the conjectured THM-cdcl-subset-deadends) is in the Appendix.
+
+\section{Scaling Past Naive Compilation}
+\todo{Change the title here}
+
+\subsection{Decomposition}
+\todo{justify decomposition more concretely here; why circuits permit this decomposition cleanly and though not resolving the problem outright, pushes the envelope to more domains}
+\todo{how are we dealing with global constraints}
+\todo{how are we dealing with back-tracking}
+The size law and the walls say *what is hard*; the levers say *what we can do about it*. The central
+finding of this paper is that one lever, decomposition, moves the envelope on **both** sides: it
+flattens compile cost (§5.1) and, as the *same mechanism*, scales generation past the cliff (§5.2).
+
+\subsubsection{Compiling}
+
+**EXP-C3-LEVER-ABLATION** (`benchmarks/runs/c3_lever_ablation/c3_lever_ablation.jsonl`) is a
+controlled before/after on the single compile-hard tileset `mxgmn_knot`, holding the instance fixed
+and swapping one lever at a time across W ∈ {4..14} (600 s wall, 12 GB RSS). The baseline is V0/B0:
+
+| W | baseline (V0/B0) | frontier_vtree (V5) | decompose (block=2) | d4 |
+|---|---|---|---|---|
+| 4 | 3,620 (0.61s) | 3,620 (0.67s) | 863 (1.16s) | count ok (126.8s) |
+| 6 | 14,733 (4.08s) | 14,733 (4.27s) | **887** (2.71s) | **timeout** |
+| 8 | 66,482 (13.8s) | 66,482 (13.8s) | 887 (5.09s) | timeout |
+| 10 | 584,030 (58.4s) | 584,030 (60.7s) | 887 (9.13s) | timeout |
+| 12 | **timeout** | **timeout** | 887 (15.3s) | timeout |
+| 14 | timeout | timeout | **887** (24.1s) | timeout |
+
+**Decomposition is the mover.** Partition the grid into small blocks (block=2), compile each block's
+constraint subproblem against its placed neighbors, and compose. The block count grows with the grid
+(4→49 across W=4..14) but each block's circuit stays small: **flat 887 SDD nodes through W=14**
+(max_vtree_width pinned at 78) at compile cost growing only linearly in block count — while the
+baseline walls at W=12. At W=14 the baseline is a timeout and decomposition compiles in 24 s at 887
+nodes. SUPPORTED, and **replicated on a second hard tileset** (EXP-C3B-LR-LEVER-ABLATION,
+vglc_lode_runner: decompose flat 555→891 nodes while baseline reaches W=12 and walls at W=14) — so
+"decomposition moves the envelope" rests on two structurally distinct hard tilesets. Bounded by
+WALL-HIER-1 (it moves the blowup only while each block stays low-width — proven negative on the
+structured-cardinality variant, §4).
+
+**The non-movers, controlled against.** A **frontier-aligned vtree** (V5/MINCE) gives *byte-for-byte
+identical* SDD size to baseline at every width that compiles and walls at W=12 exactly like baseline —
+C3 confirms the earlier 1.9% smoke win was noise; on the hard tileset the frontier vtree gives zero
+envelope movement. **D4** is instance-dependent, dramatically: a hero on wide skill-tree frontiers
+(`poe_passive` PSDD 600 s vs D4 0.295 s) but the *worst* lever on dense knot, walling at W=6 — earlier
+than even the baseline SDD (the LR ablation makes the span concrete: D4 there survives to W=12). And
+**structural sharing** (SC10/SC11) is refuted: `mgr.rename_variables` rebuilds at full scratch cost;
+the cell floor 6·16·16 = 1536 + edge residual ≈1332 = 2868 = current B3/V6, so the projected "<2000"
+gate is unreachable (EXP-SC11-B6-SPIKE). **The lever verdict: decomposition is the only general
+escape that holds — keep each compiled sub-problem low-width — exactly what THM-treewidth-sdd predicts
+and WALL-HIER-1 bounds.**
+
+\subsubsection{Sampling}
+### 5.2 Generation side: local-block conditioning (the same mechanism)
+
+The escape on the generation side is the *same lever*: condition the WFC circuit on a coarse skeleton
+and compile only the residual. A `LocalBlockConditional` partitions the grid, compiles each block
+independently (each block's frontier is bounded, so its circuit is small and W-independent), and
+stitches via overlap. This is decomposition applied to sampling rather than to a one-shot compile.
+
+**RAM relief (EXP-REDUN2-ANCHOR).** The decompose peak RSS is **W-independent (~60 MB flat, W=4→12)**
+while the monolith explodes 63 MB → 4164 MB (W=10) → **9345 MB timeout/WALLED (W=12)**. At W=12 the
+decomposition reaches the grid where the monolith walls at **>160× less RAM** (55 MB vs >9.3 GB).
+Residual frontier width is flat (24 toy_roads / 78 knot) vs monolith ≈2·W². Arm A is exact (clamped
+model_count 10400 = exact conditional).
+
+**Reach (EXP-B1T-TOYROADS-32, EXP-B1-KNOT-LARGEW).** Local-block constrained *sampling* **reaches
+32×32** on the compile-easy toy_roads tileset: every rung W=12→32 returns **200/200 distinct** grids
+at **ESS-frac 1.0** (a single dip to 0.807 at W=24), mean Hamming ≈0.51, with sampler-process RSS
+climbing ~W² (1.6 → 10.6 GB at W=12→32, ~20 s end-to-end at 32×32) landing just under the 11 GB
+budget. The *identical kernel* on the compile-hard knot tileset **reaches W=16** (200/200 diversity,
+ESS-frac 1.0, sampler RSS 10.5 GB) before **W=20 OOMs** at 11 GB. The wall is the **sampler-process
+RAM** (it caches all ~W²/4 per-block circuits at once), **not** per-block compile (flat ~60 MB) — a
+shape-keyed cache would flatten it (future work). Accuracy is preserved: on the enumerable toy_roads
+W=3 check the decompose-Gibbs TV = 0.04400 ≈ the monolith-exact 0.04333 vs enumerated uniform, with
+identical diversity (Hamming 0.572=0.572, richness 16=16). So 32×32 is the compile-*easy* ceiling and
+W=16 the compile-*hard* ceiling, both under an 11 GB budget — measured local-block *samples*, not
+monolithic compiles and not extrapolations.
+
+This is the seam between the two acts: the lever the C3 ablation isolates as the one compile-side
+mover is the lever that, applied to sampling, carries exact constrained generation past the cliff.
+
+\section{MCMC Toolkit}
+\subsection{Definitions}
+\todo{what is MCMC (very short) }
+\todo{what is SMC and why is it relevant here}
+\todo{Gibbs and all that, make sure we have a good formal basis but not too verbose}
+**Exact samplers (CAP-D3/D4 family).** The base capability is the WMC-proportional descent of §2:
+`freq_targets` per-literal Bernoulli reweighting (CAP-D3-1), structurally-free conditional sampling
+(CAP-D3-2/CAP-D4-2), per-literal MLE weight learning (CAP-D3-3, the literal subset of PSDD LEARN-W),
+and a KUS-style sampler over D4-compiled d-DNNF (CAP-D4-3). All are VALIDATED by three-gate harnesses
+(model-count + KL + decoded-sample) across five domains: e.g. sokoban sample-vs-exact KL < 0.01 at
+N=2000; learned deck weights recover held-out KL **0.0087/0.0103 nats** at N=4000 (~5× under the
+0.05-nat gate); D4 marginals within 3–4σ of analytic. The weighted sampler is exact only post-fix:
+the uint64 overflow took civ_techtree from KL **0.184 → ~1e-3** once the memoized bottom-up
+log-Pr walk made the 2^|v| factor cancel. We compress the full validation here and cite the catalog;
+the point for this paper is that the exact samplers are the in-envelope primitive the MCMC toolkit
+extends past the cliff.
+
+When the global constraint will *not* compile small — connectivity is the canonical case, which
+cliffs at 3×3 — we keep the *base-adjacency* circuit (which does compile) and wrap MCMC around it.
+
+**Block-Gibbs + parallel tempering (SC18; HYP-D4-3 / HYP-D5-4, PARTIAL).** Partition the grid into
+blocks and resample each from its exact base conditional, accepting iff the global constraint holds.
+The exact-conditional *always-accept* per-block draw (the Venugopal–Gogate Theorem-1 transfer)
+eliminates coarse-block rejection: on `rows`, ESS rises **693→2168 (3.13×), 645→2419 (3.75×),
+613→2672 (4.36×)** at 4×4/5×5/6×6 — the gain *widens* with grid size, tracking the deepening
+rejection. (Honest counter-result: on `single_cells`, which has no rejection problem, the
+exact-conditional draw is *not* better, ESS 0.73–0.84×; the win is specifically rejection-elimination
+on coarse blocks.) Parallel tempering with a *soft* β-weighted connectivity feature adds a
+generative-control knob: the β knob dials `connected_fraction` monotonically from 0.097 (β=0) to 1.0
+(β≥16) while staying ~0.06 TV to connected. The toolkit spans three WFC tilesets — toy_roads (T=4),
+knot (T=13), Lode Runner (T=8) — and both a **weighted** target (block-Gibbs matches an exact weighted
+i.i.d. oracle to max |diff| ≤ 0.005) and a larger-T grid (knot 5×5 β-knob). It stays PARTIAL because
+only the connectivity constraint class is exercised and Phase C approximates π_hard (TV < 0.08)
+rather than the exact always-accept.
+
+**Constraint-conditioned SIR/SNIS (SC19; HYP-D4-2, SUPPORTED).** The row-chain (§7) is the
+autoregressive proposal for a locally-constrained-resampling SIR/SNIS loop: each row carries a
+Bailleux–Boufkhad totalizer over a counted feature, and the compiled per-row count *is* the exact
+local twist (= to-go model count) that vanilla WFC and untwisted SMC must approximate. Three gates
+green on WFC (exactness 100%; distributional TV = **0.0405 < 0.05**; ESS calibration FB/AR 1.033), and
+the *same* `core.sir` loop ports to the quest prereq DAG with per-layer totalizers over tagged tasks
+(three gates green on both instances) — the only cross-*domain* leg of the toolkit.
+
+**Querying survives decomposition.** A practical corollary of these strategies is that exact
+*analysis* does not vanish when the global space refuses to compile — it degrades to the local
+circuits. Because each block (§5.2) and each row (the SIR loop above) is itself a compiled circuit,
+the exact queries — feasibility, exact and weighted model counts, conditional marginals — remain
+available as O(|block circuit|) reads even though the monolithic space is past the cliff. The per-row
+totalizer count that drives the SIR twist *is* exactly such a query: an exact local model count (the
+to-go count) read off a circuit whose global counterpart never compiled. So the escape buys two
+things at once — it carries hard-constrained *generation* past the compile cliff, and it preserves a
+useful subset of exact *querying* on the local circuits, rather than abandoning the analysis surface
+the moment monolithic compilation fails.
+
+**SAT-Metropolis (SC20; HYP-D4-1, SUPPORTED).** To impose a soft global feature (a target
+tile-frequency vector) on the hard-constrained base, wrap the exact i.i.d. PSDD sampler in a
+Metropolis outer loop. Because the proposal is the state-independent exact i.i.d. draw, the proposal
+density cancels and the MH ratio collapses to exp(−β·Δf). At β=10 this contracts the soft feature's
+L1 by **39%** vs the β=0.1 i.i.d. baseline (chain-empirical L1 monotone-non-increasing in β; split-R̂
+≈ 1.00 confirms convergence, the borderline ESS=165 at β=10 being an autocorrelation effect, not
+non-convergence). The borderline high-β ESS is what motivates the parallel tempering above.
+
+\subsection{Case Studies}
+\subsubsection{Case Study 1}
+\todo{no global constraints}
+\subsubsection{Case Study 2}
+\todo{with global constraints}
+\section{Validity and quality beyond the compilation wall}
+\todo{enumerate here what validity means or quality 1) diversity 2) distributional fideilty 3)...}
+\todo{need to define what the baselines to compare against are here}
+\todo{more experiments with baselines}
+The escape (§5–§6) carries generation past the compile cliff; the question a designer asks next is
+whether it still *matches the corpus*. **EXP-HYP-D5-11** answers it head-to-head against the standard
+learned-distribution baseline.
+
+> **TODO (P2-T1, carried from the source draft):** the head-to-head currently covers only the
+> Snodgrass-style MRF style-matcher. Cover the other diversity-/style-matching techniques in the
+> literature (beyond MRF-style matchers) so the comparison is not a single-baseline strawman — and
+> supply the missing citation for the MRF/style-matching family.
+
+**Setup.** WFC SimpleTiled on **VGLC Lode Runner** (150 levels, H=22, T=8; 120 train / 30 held-out
+test; near-saturated adjacency 97%/92%). Samplers: **SC2** = PSDD row-chain (ancestral, `freq_targets`
+= empirical tile frequencies, B3 + balanced vtree) — compile two *small* SDDs (a first-row circuit and
+a row-pair circuit) and sample row-by-row, conditioning row k on the sampled row k−1, decoupling
+compile (O(W)) from grid height (O(H)) — vs **MRF** = a Snodgrass-style pairwise-bigram Gibbs
+sampler, n_sweeps=500. W ∈ {8,12,14}, N=128 per arm, 3 column crops × 30 test levels, multi-seed CI
+over seeds 0/1/2. Primary metric: symmetric 2×2-pattern KL.
+
+**Result.** SC2 wins **all 9/9 (seed × W) arms**. Mean margins are **0.681 / 0.939 / 0.989 nats** at
+W=8/12/14 (min-across-seeds 0.624/0.838/0.874 — all ≥12× the 0.05-nat tolerance); per-tile margins
+are tighter and steadier (0.70/0.77/0.77 nats). The accuracy-vs-wall picture (seed-0, sampling-only):
+
+| W | sampler | symmetric 2×2 KL | per-tile KL | wall (s) |
+|---|---------|------------------|-------------|----------|
+| 8 | MRF | 2.5045 | 0.7457 | 50.8 |
+| 8 | SC2 | **1.8803** | **0.0510** | 2.8 |
+| 12 | MRF | 2.5855 | 0.8356 | 75.0 |
+| 12 | SC2 | **1.7478** | **0.0496** | 286.4 |
+| 14 | MRF | 2.7447 | 0.8376 | **89.7** |
+| 14 | SC2 | **1.6923** | **0.0446** | **38,937.7** |
+
+**Status: SUPPORTED**, framed honestly as **accuracy-vs-wall**: the win in distributional fidelity
+costs compute — the W=14 circuit arm samples in **~10.8 h** versus the MRF's **~90 s** (~434×, the
+cost dominated by the W=14 row-pair vocabulary ~7.5×10⁶), and W≈14 is the realistic Lode Runner
+compile ceiling. We do not claim "strictly better than MRF everywhere," and we say "Lode Runner," not
+"corpora." The honest nuance: "margin widens monotonically with W" is seed-dependent (seed-2 dips at
+W=14); the robust claim is "SC2 wins at every W and every seed by 0.6–1.1 nats." This is the program's
+payoff: the decomposition escape reaches the widths where the monolith dies, *and* the content it
+generates there matches the corpus better than the standard style-matcher does.
+
+
+\section{Limitation}
+
+\todo{enumerate overall these limitations and see what are actually thoeritrical limations vs methodlogical ones}
+We state the boundaries of every claim above.
+
+- **The MRF win is accuracy-vs-wall, on Lode Runner.** §7. The W=14 circuit arm costs ~10.8 h vs ~90 s
+  (~434×). W≈14 is the realistic ceiling. Not "strictly better everywhere," and "Lode Runner," not
+  "corpora."
+
+- **The 32×32 number is tileset-specific.** Real only on compile-*easy* toy_roads, as a measured
+  local-block *sample* (every rung 200/200 diverse, ESS-frac 1.0, 10.6 GB at the 11 GB budget), not a
+  monolithic compile and not an extrapolation. On compile-*hard* knot the same kernel reaches **W=16**
+  (W=20 OOMs). The wall is sampler-process RAM (caches ~W²/4 per-block circuits), not per-block
+  compile (flat ~60 MB).
+
+- **Decomposition's non-movers, kept.** The frontier-aligned vtree gives *no* envelope gain on the
+  hard tileset (C3 identical to baseline; the 1.9% smoke win was noise); structural sharing is refuted
+  (SC11); D4 is instance-dependent (hero on skill-tree, walls at W=4 on dense knot — the worst lever
+  there); symmetry-quotient is capped at |G| ≤ 8 (WALL-D5-2). No universal "use D4" or "use a frontier
+  vtree" claim survives.
+
+- **Hierarchical-fill correction is refuted (honest negative).** The MEASURE half holds (uncorrected
+  hierarchical sampling is non-uniform, TV 0.80–0.95), but the CORRECTION half is REFUTED: weighting
+  each path by the conditioned PSDD's exact completion-count does not recover uniformity (TV stays
+  ~0.76–0.83). The binding bias is the non-deterministic off-path *fill* P(g | obs(π)), not path
+  multiplicity, so count-weighting cannot address it (EXP-HIER1B-*).
+
+- **The MCMC toolkit's scope is bounded.** SC18 spans three WFC tilesets and the weighted + larger-T
+  regimes, but only the connectivity constraint class is exercised and Phase C approximates π_hard;
+  SC20 remains toy_roads/knot only; SC19 is the cross-domain leg. Exact-circuit forward-backward
+  sampling is W≤6-bounded (row-state enumeration), so the §7 head-to-head uses the ancestral sampler
+  with its ~0.16-nat row-0 bias. HYP-D4-3 / HYP-D5-4 / CAP-D4-5 stay PARTIAL on these grounds.
+
+---
+
+\section{Conclusion}
+\bibliography{aaai24}
+
+\end{document}
